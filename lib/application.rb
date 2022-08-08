@@ -12,11 +12,15 @@ class Application
   def call(env)
     @request = MyRequest.new(env)
     route = router.bind!(url: request.url, method: request.method)
-    body = route.process.call(request.params)
-    ['200', {'Content-Type' => 'text/html'}, [body]]
+    if route
+      body = route.process.call(request.params)
+      ['200', {'Content-Type' => 'text/html'}, [body]]
+    else
+      ["400", {"Content-Type" => "text/plain"}, ["Not Found"]]
+    end
   end
 
   def run!
-    Rack::Handler::WEBrick.run self
+    Rack::Handler::WEBrick.run self, :Port => 9292
   end
 end
