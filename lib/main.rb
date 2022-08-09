@@ -2,13 +2,14 @@
 
 require_relative './router.rb'
 require_relative './application.rb'
+require_relative './controller.rb'
 
 def router
   @router ||= Router.new
 end
 
 def render(path)
-  file_path = "./views/#{path}.erb"
+  file_path = "./app/views/#{path}.erb"
   template_file = File.read(file_path)
   ERB.new(template_file).result
 end
