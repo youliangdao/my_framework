@@ -1,10 +1,5 @@
 require_relative './lib/main.rb'
 
-router.get "/" do
-  "Hello MyFramework"
-end
-
-router.get '/hello' do |params|
-  @body = params["word"] || "Hello World"
-  render :index
+router.get '/hello' do
+  "MainController#index"
 end

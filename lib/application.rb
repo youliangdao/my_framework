@@ -1,4 +1,5 @@
 require_relative './my_request.rb'
+
 require 'rack'
 
 class Application
@@ -12,12 +13,10 @@ class Application
   def call(env)
     @request = MyRequest.new(env)
     route = router.bind!(url: request.url, method: request.method)
-    if route
-      body = route.process.call(request.params)
-      ['200', {'Content-Type' => 'text/html'}, [body]]
-    else
-      ["400", {"Content-Type" => "text/plain"}, ["Not Found"]]
-    end
+    block = route.process.call
+    controller = Controller.new(request.param)
+    body = controller.define_action(block.split("#")[1])
+    ['200', {'Content-Type' => 'text/html'}, [body]]
   end
 
   def run!
