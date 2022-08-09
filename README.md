@@ -9,14 +9,3 @@ app.rbを実行するとWEBrickがローカル上で起動し、http://localhost
 ```.bash
 $ ruby app.rb
 ```
-
-## 使い方
-app.rbファイルに以下のようにルーティングを設定することで、対応したビューファイルを返します。
-基本的にはSinatraと同じ使い方です。
-
-```.rb
-router.get '/hello' do |params|
-  @body = params["word"] || "Hello World"
-  render :index
-end
-```
