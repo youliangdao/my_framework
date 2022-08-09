@@ -14,7 +14,6 @@ class Router
   end
 
   def bind!(url:, method:)
-    # urlのpathの部分だけ取得 ex. `http://localhost:8080/hello` -> `/hello`
     path = URI.parse(url).path
     routes.find { |route| route.path == path && route.method == method }
   end
